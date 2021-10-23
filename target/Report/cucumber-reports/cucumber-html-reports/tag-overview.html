@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html>
+<head>
+  
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/jquery.tablesorter.min.js"></script>
+<script type="text/javascript" src="js/Chart.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+
+<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css"/>
+<link rel="stylesheet" href="css/reporting.css" type="text/css"/>
+<link rel="stylesheet" href="css/font-awesome.min.css"/>
+<link rel="shortcut icon" href="images/favicon.png"/>
+
+<script type="text/javascript">
+$(document).ready(function() {
+    // this will tell tablesorter to try looking for the data-value attribute
+    // if present, it'll sort by that instead
+    // otherwise, it'll sort by the text content of the table cell
+    $("#tablesorter").tablesorter({
+        textAttribute: 'data-value',
+        // ignores the first row of the header, the 'scenario', 'steps', since
+        // sorting those doesn't make sense
+        selectorHeaders: '> thead tr:not(.dont-sort) th',
+        // use a stable sort
+        sortStable: true
+    });
+});
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+<title>Cucumber-JVM Reports  - Tags Overview</title>
+
+
+  <script type="text/javascript">
+  $(document).ready(function() {
+
+    var chartData = {
+        labels: ["@AddCard","@AddList","@AddListNegative","@AddListPostive","@Archive","@ArchiveList","@CardNegative","@CardPositive","@Dev","@Restore","@RestoreCard","@RestoreList","@SchedulePositive","@SendEmptyMessage","@SendMessage","@SignIn","@SignInGoogle","@groupChat","@notification","@schedule","@tag1"],
+        datasets: [
+            {
+                label: 'Passed',
+                backgroundColor: "#92DD96",
+                data: [60.00, 100.00, 100.00, 100.00, 100.00, 100.00, 60.00, 60.00, 63.46, 55.56, 100.00, 20.00, 20.00, 66.67, 20.00, 100.00, 100.00, 37.50, 33.33, 20.00, 33.33]
+            },
+            {
+                label: 'Failed',
+                backgroundColor: "#F2928C",
+                data: [20.00, 0.00, 0.00, 0.00, 0.00, 0.00, 20.00, 20.00, 13.46, 11.11, 0.00, 20.00, 20.00, 33.33, 20.00, 0.00, 0.00, 25.00, 33.33, 20.00, 33.33]
+            },
+            {
+                label: 'Skipped',
+                backgroundColor: "#8AF",
+                data: [20.00, 0.00, 0.00, 0.00, 0.00, 0.00, 20.00, 20.00, 19.23, 33.33, 0.00, 60.00, 40.00, 0.00, 60.00, 0.00, 0.00, 37.50, 0.00, 40.00, 0.00]
+            },
+            {
+                label: 'Pending',
+                backgroundColor: "#F5F28F",
+                data: [0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00]
+            },
+            {
+                label: 'Undefined',
+                backgroundColor: "#F5B975",
+                data: [0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 3.85, 0.00, 0.00, 0.00, 20.00, 0.00, 0.00, 0.00, 0.00, 0.00, 33.33, 20.00, 33.33]
+            }
+        ]
+    };
+
+    var ctx = document.getElementById("tags-chart");
+    window.myBar = new Chart(ctx, {
+        type: 'bar',
+        data: chartData,
+        options: {
+            tooltips: {
+                mode: 'label'
+            },
+            responsive: true,
+            legend: {
+                display: false
+            },
+            scales: {
+                xAxes: [{
+                    stacked: true
+                }],
+                yAxes: [{
+                    stacked: true
+                }]
+            }
+        }
+    });
+
+});  </script>
+</head>
+<body>
+
+<nav class="navbar navbar-default navbar-fixed-top" id="navigation">
+  <div class="container-fluid">
+    <div class="collapse navbar-collapse">
+      <p class="navbar-text navbar-left">Cucumber-JVM Report</p>
+      <ul class="nav navbar-nav navbar-right">
+                <li role="presentation" ><a href="feature-overview.html">Features</a></li>
+        <li role="presentation"      class="active" ><a href="tag-overview.html">Tags</a></li>
+        <li role="presentation" ><a href="step-overview.html">Steps</a></li>
+        <li role="presentation" ><a href="failures-overview.html">Failures</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container-fluid" id="build-info">
+  <div class="row">
+    <div class="col-md-6 col-md-offset-1">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Project</th>
+                          <th>Number</th>
+                        <th>Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="info">
+            <td>Project Name</td>
+                          <td>1</td>
+                        <td>23 Oct 2021, 08:02</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div id="report-lead" class="container-fluid>
+  <div class="row">
+    <div class="col-md-10 col-md-offset-1">
+      <h2>Tags Statistics</h2>
+              <p>The following graph shows passing and failing statistics for tags</p>
+          </div>
+  </div>
+</div>
+
+
+  <div class="container-fluid" id="charts">
+    <div class="row">
+      <div class="col-md-10 col-md-offset-1">
+        <canvas id="tags-chart" height="50"></canvas>
+      </div>
+    </div>
+  </div>
+
+<br>
+<div class="container-fluid" id="summary">
+  <div class="row">
+    <div class="col-md-10 col-md-offset-1">
+              
+<table id="tablesorter" class="stats-table table-hover">
+  <thead>
+  <tr class="header dont-sort">
+        <th></th>
+    <th colspan="3">Scenarios</th>
+    <th colspan="6">Steps</th>
+    <th colspan="2">Totals</th>
+  </tr>
+  <tr>
+    <th>Tag</th>
+        <th class="passed">Passed</th>
+    <th class="failed">Failed</th>
+    <th class="total">Total</th>
+    <th class="passed">Passed</th>
+    <th class="failed">Failed</th>
+    <th class="skipped">Skipped</th>
+    <th class="pending">Pending</th>
+    <th class="undefined">Undefined</th>
+    <th class="total">Total</th>
+    <th>Duration</th>
+    <th>Status</th>
+  </tr>
+</thead>
+
+  <tbody>
+          <tr>
+        <td class="tagname"><a href="AddCard.html">@AddCard</a></td>
+        
+        <td >0</td>
+        <td  class="failed"    >2</td>
+        <td class="total">2</td>
+        <td      class="passed"    >6</td>
+        <td      class="failed"    >2</td>
+        <td     class="skipped"   >2</td>
+        <td >0</td>
+        <td >0</td>
+        <td class="total">10</td>
+        <td class="duration" data-value="57295480400">57s 295ms</td>
+        <td class="failed">Failed</td>
+      </tr>
+          <tr>
+        <td class="tagname"><a href="AddList.html">@AddList</a></td>
+        
+        <td  class="passed"    >2</td>
+        <td >0</td>
+        <td class="total">2</td>
+        <td      class="passed"    >9</td>
+        <td >0</td>
+        <td >0</td>
+        <td >0</td>
+        <td >0</td>
+        <td class="total">9</td>
+        <td class="duration" data-value="64292416700">1m 4s 292ms</td>
+        <td class="passed">Passed</td>
+      </tr>
+          <tr>
+        <td class="tagname"><a href="AddListNegative.html">@AddListNegative</a></td>
+        
+        <td  class="passed"    >1</td>
+        <td >0</td>
+        <td class="total">1</td>
+        <td      class="passed"    >4</td>
+        <td >0</td>
+        <td >0</td>
+        <td >0</td>
+        <td >0</td>
+        <td class="total">4</td>
+        <td class="duration" data-value="38484456500">38s 484ms</td>
+        <td class="passed">Passed</td>
+      </tr>
+          <tr>
+        <td class="tagname"><a href="AddListPostive.html">@AddListPostive</a></td>
+        
+        <td  class="passed"    >1</td>
+        <td >0</td>
+        <td class="total">1</td>
+        <td      class="passed"    >5</td>
+        <td >0</td>
+        <td >0</td>
+        <td >0</td>
+        <td >0</td>
+        <td class="total">5</td>
+        <td class="duration" data-value="25807960200">25s 807ms</td>
+        <td class="passed">Passed</td>
+      </tr>
+          <tr>
+        <td class="tagname"><a href="Archive.html">@Archive</a></td>
+        
+        <td  class="passed"    >1</td>
+        <td >0</td>
+        <td class="total">1</td>
+        <td      class="passed"    >5</td>
+        <td >0</td>
+        <td >0</td>
+        <td >0</td>
+        <td >0</td>
+        <td class="total">5</td>
+        <td class="duration" data-value="47862316700">47s 862ms</td>
+        <td class="passed">Passed</td>
+      </tr>
+          <tr>
+        <td class="tagname"><a href="ArchiveList.html">@ArchiveList</a></td>
+        
+        <td  class="passed"    >1</td>
+        <td >0</td>
+        <td class="total">1</td>
+        <td      class="passed"    >5</td>
+        <td >0</td>
+        <td >0</td>
+        <td >0</td>
+        <td >0</td>
+        <td class="total">5</td>
+        <td class="duration" data-value="47862316700">47s 862ms</td>
+        <td class="passed">Passed</td>
+      </tr>
+          <tr>
+        <td class="tagname"><a href="CardNegative.html">@CardNegative</a></td>
+        
+        <td >0</td>
+        <td  class="failed"    >1</td>
+        <td class="total">1</td>
+        <td      class="passed"    >3</td>
+        <td      class="failed"    >1</td>
+        <td     class="skipped"   >1</td>
+        <td >0</td>
+        <td >0</td>
+        <td class="total">5</td>
+        <td class="duration" data-value="27965733000">27s 965ms</td>
+        <td class="failed">Failed</td>
+      </tr>
+          <tr>
+        <td class="tagname"><a href="CardPositive.html">@CardPositive</a></td>
+        
+        <td >0</td>
+        <td  class="failed"    >1</td>
+        <td class="total">1</td>
+        <td      class="passed"    >3</td>
+        <td      class="failed"    >1</td>
+        <td     class="skipped"   >1</td>
+        <td >0</td>
+        <td >0</td>
+        <td class="total">5</td>
+        <td class="duration" data-value="29329747400">29s 329ms</td>
+        <td class="failed">Failed</td>
+      </tr>
+          <tr>
+        <td class="tagname"><a href="Dev.html">@Dev</a></td>
+        
+        <td  class="passed"    >5</td>
+        <td  class="failed"    >7</td>
+        <td class="total">12</td>
+        <td      class="passed"    >33</td>
+        <td      class="failed"    >7</td>
+        <td     class="skipped"   >10</td>
+        <td >0</td>
+        <td   class="undefined" >2</td>
+        <td class="total">52</td>
+        <td class="duration" data-value="291165702700">4m 51s 165ms</td>
+        <td class="failed">Failed</td>
+      </tr>
+          <tr>
+        <td class="tagname"><a href="Restore.html">@Restore</a></td>
+        
+        <td  class="passed"    >1</td>
+        <td  class="failed"    >1</td>
+        <td class="total">2</td>
+        <td      class="passed"    >5</td>
+        <td      class="failed"    >1</td>
+        <td     class="skipped"   >3</td>
+        <td >0</td>
+        <td >0</td>
+        <td class="total">9</td>
+        <td class="duration" data-value="46384524400">46s 384ms</td>
+        <td class="failed">Failed</td>
+      </tr>
+          <tr>
+        <td class="tagname"><a href="RestoreCard.html">@RestoreCard</a></td>
+        
+        <td  class="passed"    >1</td>
+        <td >0</td>
+        <td class="total">1</td>
+        <td      class="passed"    >4</td>
+        <td >0</td>
+        <td >0</td>
+        <td >0</td>
+        <td >0</td>
+        <td class="total">4</td>
+        <td class="duration" data-value="28066244600">28s 066ms</td>
+        <td class="passed">Passed</td>
+      </tr>
+          <tr>
+        <td class="tagname"><a href="RestoreList.html">@RestoreList</a></td>
+        
+        <td >0</td>
+        <td  class="failed"    >1</td>
+        <td class="total">1</td>
+        <td      class="passed"    >1</td>
+        <td      class="failed"    >1</td>
+        <td     class="skipped"   >3</td>
+        <td >0</td>
+        <td >0</td>
+        <td class="total">5</td>
+        <td class="duration" data-value="18318279800">18s 318ms</td>
+        <td class="failed">Failed</td>
+      </tr>
+          <tr>
+        <td class="tagname"><a href="SchedulePositive.html">@SchedulePositive</a></td>
+        
+        <td >0</td>
+        <td  class="failed"    >1</td>
+        <td class="total">1</td>
+        <td      class="passed"    >1</td>
+        <td      class="failed"    >1</td>
+        <td     class="skipped"   >2</td>
+        <td >0</td>
+        <td   class="undefined" >1</td>
+        <td class="total">5</td>
+        <td class="duration" data-value="8216223100">8s 216ms</td>
+        <td class="failed">Failed</td>
+      </tr>
+          <tr>
+        <td class="tagname"><a href="SendEmptyMessage.html">@SendEmptyMessage</a></td>
+        
+        <td >0</td>
+        <td  class="failed"    >1</td>
+        <td class="total">1</td>
+        <td      class="passed"    >2</td>
+        <td      class="failed"    >1</td>
+        <td >0</td>
+        <td >0</td>
+        <td >0</td>
+        <td class="total">3</td>
+        <td class="duration" data-value="27013472000">27s 013ms</td>
+        <td class="failed">Failed</td>
+      </tr>
+          <tr>
+        <td class="tagname"><a href="SendMessage.html">@SendMessage</a></td>
+        
+        <td >0</td>
+        <td  class="failed"    >1</td>
+        <td class="total">1</td>
+        <td      class="passed"    >1</td>
+        <td      class="failed"    >1</td>
+        <td     class="skipped"   >3</td>
+        <td >0</td>
+        <td >0</td>
+        <td class="total">5</td>
+        <td class="duration" data-value="14295329500">14s 295ms</td>
+        <td class="failed">Failed</td>
+      </tr>
+          <tr>
+        <td class="tagname"><a href="SignIn.html">@SignIn</a></td>
+        
+        <td  class="passed"    >1</td>
+        <td >0</td>
+        <td class="total">1</td>
+        <td      class="passed"    >3</td>
+        <td >0</td>
+        <td >0</td>
+        <td >0</td>
+        <td >0</td>
+        <td class="total">3</td>
+        <td class="duration" data-value="15800928100">15s 800ms</td>
+        <td class="passed">Passed</td>
+      </tr>
+          <tr>
+        <td class="tagname"><a href="SignInGoogle.html">@SignInGoogle</a></td>
+        
+        <td  class="passed"    >1</td>
+        <td >0</td>
+        <td class="total">1</td>
+        <td      class="passed"    >3</td>
+        <td >0</td>
+        <td >0</td>
+        <td >0</td>
+        <td >0</td>
+        <td class="total">3</td>
+        <td class="duration" data-value="15800928100">15s 800ms</td>
+        <td class="passed">Passed</td>
+      </tr>
+          <tr>
+        <td class="tagname"><a href="groupChat.html">@groupChat</a></td>
+        
+        <td >0</td>
+        <td  class="failed"    >2</td>
+        <td class="total">2</td>
+        <td      class="passed"    >3</td>
+        <td      class="failed"    >2</td>
+        <td     class="skipped"   >3</td>
+        <td >0</td>
+        <td >0</td>
+        <td class="total">8</td>
+        <td class="duration" data-value="41308801500">41s 308ms</td>
+        <td class="failed">Failed</td>
+      </tr>
+          <tr>
+        <td class="tagname"><a href="notification.html">@notification</a></td>
+        
+        <td >0</td>
+        <td  class="failed"    >1</td>
+        <td class="total">1</td>
+        <td      class="passed"    >1</td>
+        <td      class="failed"    >1</td>
+        <td >0</td>
+        <td >0</td>
+        <td   class="undefined" >1</td>
+        <td class="total">3</td>
+        <td class="duration" data-value="10005011800">10s 005ms</td>
+        <td class="failed">Failed</td>
+      </tr>
+          <tr>
+        <td class="tagname"><a href="schedule.html">@schedule</a></td>
+        
+        <td >0</td>
+        <td  class="failed"    >1</td>
+        <td class="total">1</td>
+        <td      class="passed"    >1</td>
+        <td      class="failed"    >1</td>
+        <td     class="skipped"   >2</td>
+        <td >0</td>
+        <td   class="undefined" >1</td>
+        <td class="total">5</td>
+        <td class="duration" data-value="8216223100">8s 216ms</td>
+        <td class="failed">Failed</td>
+      </tr>
+          <tr>
+        <td class="tagname"><a href="tag1.html">@tag1</a></td>
+        
+        <td >0</td>
+        <td  class="failed"    >1</td>
+        <td class="total">1</td>
+        <td      class="passed"    >1</td>
+        <td      class="failed"    >1</td>
+        <td >0</td>
+        <td >0</td>
+        <td   class="undefined" >1</td>
+        <td class="total">3</td>
+        <td class="duration" data-value="10005011800">10s 005ms</td>
+        <td class="failed">Failed</td>
+      </tr>
+      </tbody>
+
+  <tfoot class="total">
+    <tr>
+      <td>21</td>
+            <td>13</td>
+      <td>23</td>
+      <td>36</td>
+      <td>99</td>
+      <td>21</td>
+      <td>30</td>
+      <td>0</td>
+      <td>6</td>
+      <td>156</td>
+      <td class="duration">14m 33s 497ms</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td></td>
+            <td>36.11%</td>
+      <td>63.89%</td>
+      <td></td>
+      <td>63.46%</td>
+      <td>13.46%</td>
+      <td>19.23%</td>
+      <td>0.00%</td>
+      <td>3.85%</td>
+      <td></td>
+      <td></td>
+      <td>63.89%</td>
+    </tr>
+  </tfoot>
+</table>
+
+          </div>
+  </div>
+</div>
+
+<nav class="navbar navbar-default" id="footer">
+  <div class="container-fluid">
+    <p class="navbar-text navbar-right">
+        <small>generate Cucumber HTML reports via:&nbsp;</small>
+        <a class="navbar-link" href="https://github.com/jenkinsci/cucumber-reports-plugin">Jenkins Plugin</a> |
+        <a class="navbar-link" href="https://github.com/damianszczepanik/cucumber-reporting">Standalone</a> |
+        <a class="navbar-link" href="https://github.com/damianszczepanik/cucumber-sandwich">Sandwich</a> |
+        <a class="navbar-link" href="https://github.com/damianszczepanik/maven-cucumber-reporting">Maven</a>
+        &nbsp;&nbsp;
+    </p>
+  </div>
+</nav>
+
+</body>
+</html>
